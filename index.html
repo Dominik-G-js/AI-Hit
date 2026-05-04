@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>AI Hit - 3D střelnice</title>
+  </head>
+  <body>
+    <div id="canvas-root" aria-hidden="true"></div>
+
+    <main id="hud" class="hud">
+      <section class="hud__status" aria-label="Stav kola">
+        <div>
+          <span class="hud__label">Zbraň</span>
+          <strong id="weapon-name">Pistole</strong>
+        </div>
+        <div>
+          <span class="hud__label">Munice</span>
+          <strong id="ammo-count">12 / 12</strong>
+        </div>
+        <div>
+          <span class="hud__label">Přesnost</span>
+          <strong id="accuracy-value">0%</strong>
+        </div>
+        <div>
+          <span class="hud__label">Zásahy</span>
+          <strong id="hit-value">0 / 0</strong>
+        </div>
+      </section>
+
+      <div id="crosshair" class="crosshair" aria-hidden="true">
+        <span></span>
+        <span></span>
+      </div>
+
+      <aside id="npc-bubble" class="npc-bubble" aria-live="polite">
+        <p id="npc-text">Vystřílej zásobník. Pak si tě podám podle výsledku.</p>
+        <span id="npc-source">lokální trenér</span>
+      </aside>
+
+      <section id="result-panel" class="result-panel" aria-live="polite" hidden>
+        <span class="hud__label">Vyhodnocení zásobníku</span>
+        <div id="result-stats" class="result-panel__stats"></div>
+      </section>
+
+      <div id="prompt" class="prompt">Klikni do střelnice</div>
+    </main>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,240 @@
+:root {
+  color-scheme: dark;
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --panel: rgba(13, 17, 19, 0.74);
+  --panel-strong: rgba(8, 11, 13, 0.88);
+  --line: rgba(220, 228, 224, 0.18);
+  --text: #eef4f0;
+  --muted: #9aa8a3;
+  --accent: #d8bc67;
+  --hit: #7ed1a4;
+  --danger: #e36b54;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#canvas-root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #14191d;
+}
+
+body {
+  color: var(--text);
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.hud {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hud__status {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(78px, 1fr));
+  gap: 8px;
+  max-width: min(660px, calc(100vw - 32px));
+  padding: 8px;
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(17, 23, 25, 0.82), rgba(10, 14, 16, 0.66));
+  backdrop-filter: blur(10px);
+}
+
+.hud__status > div,
+.result-panel__stats > div {
+  min-width: 0;
+  padding: 8px 10px;
+  border-left: 2px solid rgba(216, 188, 103, 0.54);
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.hud__label {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--muted);
+  font-size: 0.68rem;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+strong {
+  display: block;
+  overflow-wrap: anywhere;
+  font-size: 0.95rem;
+  line-height: 1.05;
+  font-weight: 700;
+}
+
+.crosshair {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 24px;
+  height: 24px;
+  transform: translate(-50%, -50%);
+  opacity: 0.7;
+}
+
+.crosshair::before,
+.crosshair::after,
+.crosshair span::before,
+.crosshair span::after {
+  position: absolute;
+  display: block;
+  content: "";
+  background: rgba(238, 244, 240, 0.9);
+  box-shadow: 0 0 8px rgba(126, 209, 164, 0.3);
+}
+
+.crosshair::before,
+.crosshair::after {
+  top: 11px;
+  width: 7px;
+  height: 2px;
+}
+
+.crosshair::before {
+  left: 0;
+}
+
+.crosshair::after {
+  right: 0;
+}
+
+.crosshair span::before,
+.crosshair span::after {
+  left: 11px;
+  width: 2px;
+  height: 7px;
+}
+
+.crosshair span::before {
+  top: 0;
+}
+
+.crosshair span::after {
+  bottom: 0;
+}
+
+.crosshair--locked {
+  opacity: 1;
+}
+
+.prompt {
+  position: absolute;
+  left: 50%;
+  bottom: 26px;
+  max-width: min(420px, calc(100vw - 32px));
+  padding: 9px 14px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--text);
+  transform: translateX(-50%);
+  transition:
+    opacity 140ms ease,
+    transform 140ms ease;
+}
+
+.prompt--hidden {
+  opacity: 0;
+  transform: translate(-50%, 6px);
+}
+
+.npc-bubble {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: min(360px, calc(100vw - 32px));
+  padding: 12px 14px 10px;
+  border: 1px solid rgba(216, 188, 103, 0.42);
+  background: var(--panel-strong);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.42);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 14px), 58% calc(100% - 14px), 50% 100%, 42% calc(100% - 14px), 0 calc(100% - 14px));
+  transition: opacity 150ms ease;
+}
+
+.npc-bubble p {
+  margin: 0 0 8px;
+  font-size: clamp(0.86rem, 2vw, 1rem);
+  line-height: 1.35;
+}
+
+.npc-bubble span {
+  display: block;
+  color: var(--accent);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+}
+
+.npc-bubble--thinking {
+  border-color: rgba(126, 209, 164, 0.55);
+}
+
+.npc-bubble--offscreen {
+  opacity: 0;
+}
+
+.result-panel {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  width: min(340px, calc(100vw - 32px));
+  padding: 12px;
+  border: 1px solid var(--line);
+  background: var(--panel-strong);
+  backdrop-filter: blur(10px);
+}
+
+.result-panel__stats {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 7px;
+  margin-top: 8px;
+}
+
+.result-panel__stats > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.result-panel__stats span {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+@media (max-width: 760px) {
+  .hud__status {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .result-panel {
+    top: auto;
+    right: 12px;
+    bottom: 72px;
+    left: 12px;
+    width: auto;
+  }
+
+  .npc-bubble {
+    width: min(300px, calc(100vw - 24px));
+  }
+}
