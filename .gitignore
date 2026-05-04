@@ -5,6 +5,7 @@ coverage/
 .playwright-mcp/
 dev-server.log
 dev-server.err.log
+public/readme/webgl-check.png
 
 .env
 .env.*

@@ -2,6 +2,12 @@
 
 AI Hit je 3D first-person střelnice v prohlížeči postavená ve Vite, TypeScriptu, Three.js a Expressu. Je to portfolio ukázka, že do hry jde zapojit reálná AI: po vystřílení zásobníku server pošle statistiky do Groq API a NPC instruktor vygeneruje vlastní komentář k výkonu.
 
+## Screenshots
+
+![AI Hit pistol result with AI instructor roast](public/readme/ai-hit-pistol-result.png)
+
+![AI Hit assault rifle result with AI-generated NPC commentary](public/readme/ai-hit-assault-result.png)
+
 ## Co hra umí
 
 - Plně 3D first-person střelnice přímo v browseru.
